@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration and Payment</title>
+    <link rel="icon" href="logo.png" type="image/png" sizes="16x16" />
+    <link rel="stylesheet" href="Registration.css">
+</head>
+<body>
+    <!-- Registration Form -->
+    <section id="registration">
+        <h2>Register for Games</h2>
+        <form id="registration-form" enctype="multipart/form-data" method="POST" action="upload.php">
+            <!-- Team Details -->
+            <label for="team-name">Team Name:</label>
+            <input type="text" id="team-name" name="team_name" required><br><br>
+
+            <label for="college-name">College Name:</label>
+            <input type="text" id="college-name" name="college_name" required><br><br>
+
+            <label for="team-head">Team Head Name:</label>
+            <input type="text" id="team-head" name="team_head" required><br><br>
+
+            <label for="whatsapp">Team Head WhatsApp Number:</label>
+            <input type="tel" id="whatsapp" name="whatsapp_number" pattern="[0-9]{10}" required><br><br>
+
+            <!-- Player Names (Min 1, Max 11) -->
+            <fieldset>
+                <legend>Players' Names (Min 1, Max 11):</legend>
+                <div id="player-names">
+                    <input type="text" name="player_name[]" placeholder="Player 1" required><br>
+                </div>
+                <button type="button" id="add-player" onclick="addPlayer()">Add Player</button>
+                <button type="button" id="remove-player" onclick="removePlayer()">Remove Player</button>
+            </fieldset><br>
+
+            <!-- Upload Payment Acknowledgement (JPG) -->
+            <label for="payment-proof">Upload Payment Acknowledgement (JPG only):</label>
+            <input type="file" id="payment-proof" name="payment_proof" accept=".jpg" required><br><br>
+
+                        <!-- Game Selection -->
+                        <fieldset>
+                            <legend>Select Games:</legend>
+            
+                            <!-- Cricket -->
+                            <h3>Cricket</h3>
+                            <input type="checkbox" id="cricket-men" name="game" value="Cricket Men" data-price="5000">
+                            <label for="cricket-men">Cricket (Men) ₹5000</label><br>
+                            <input type="checkbox" id="cricket-women" name="game" value="Cricket Women" data-price="2500">
+                            <label for="cricket-women">Cricket (Women) ₹2500</label><br>
+            
+                            <!-- Basketball -->
+                            <h3>Basketball</h3>
+                            <input type="checkbox" id="basketball-men" name="game" value="Basketball Men" data-price="3500">
+                            <label for="basketball-men">Basketball (Men) ₹3500</label><br>
+                            <input type="checkbox" id="basketball-women" name="game" value="Basketball Women" data-price="2500">
+                            <label for="basketball-women">Basketball (Women) ₹2500</label><br>
+            
+                            <!-- Volleyball -->
+                            <h3>Volleyball</h3>
+                            <input type="checkbox" id="volleyball-men" name="game" value="Volleyball Men" data-price="2500">
+                            <label for="volleyball-men">Volleyball (Men) ₹2500</label><br>
+                            <input type="checkbox" id="volleyball-women" name="game" value="Volleyball Women" data-price="1500">
+                            <label for="volleyball-women">Volleyball (Women) ₹1500</label><br>
+            
+                            <!-- Badminton -->
+                            <h3>Badminton</h3>
+                            <input type="checkbox" id="badminton-men" name="game" value="Badminton Men" data-price="2500">
+                            <label for="badminton-men">Badminton (Men) ₹2500</label><br>
+                            <input type="checkbox" id="badminton-women" name="game" value="Badminton Women" data-price="2000">
+                            <label for="badminton-women">Badminton (Women) ₹2000</label><br>
+            
+                            <!-- Table Tennis -->
+                            <h3>Table Tennis</h3>
+                            <input type="checkbox" id="tabletennis-men" name="game" value="Table Tennis Men" data-price="2000">
+                            <label for="tabletennis-men">Table Tennis (Men) ₹2000</label><br>
+                            <input type="checkbox" id="tabletennis-women" name="game" value="Table Tennis Women" data-price="1500">
+                            <label for="tabletennis-women">Table Tennis (Women) ₹1500</label><br>
+            
+                            <!-- Football -->
+                            <h3>Football</h3>
+                            <input type="checkbox" id="football-men" name="game" value="Football Men" data-price="3500">
+                            <label for="football-men">Football (Men) ₹3500</label><br>
+            
+                            <!-- Kabaddi -->
+                            <h3>Kabaddi</h3>
+                            <input type="checkbox" id="kabaddi-men" name="game" value="Kabaddi Men" data-price="2500">
+                            <label for="kabaddi-men">Kabaddi (Men) ₹2500</label><br>
+            
+                            <!-- Throwball -->
+                            <h3>Throwball</h3>
+                            <input type="checkbox" id="throwball-women" name="game" value="Throwball Women" data-price="2000">
+                            <label for="throwball-women">Throwball (Women) ₹2000</label><br>
+            
+                            <!-- Chess -->
+                            <h3>Chess</h3>
+                            <input type="checkbox" id="chess-men" name="game" value="Chess Men" data-price="1000">
+                            <label for="chess-men">Chess (Men) ₹1000</label><br>
+                            <input type="checkbox" id="chess-women" name="game" value="Chess Women" data-price="1000">
+                            <label for="chess-women">Chess (Women) ₹1000</label><br>
+            
+                            <!-- Carroms -->
+                            <h3>Carroms</h3>
+                            <input type="checkbox" id="carroms-men" name="game" value="Carroms Men" data-price="1000">
+                            <label for="carroms-men">Carroms (Men) ₹1000</label><br>
+                            <input type="checkbox" id="carroms-women" name="game" value="Carroms Women" data-price="1000">
+                            <label for="carroms-women">Carroms (Women) ₹1000</label><br>
+            
+                        </fieldset><br>
+            
+                        <input type="submit" value="Register">
+                    </form>
+                </section>
+
+    <!-- Subtotal Display -->
+    <section id="subtotal">
+        <h2>Subtotal</h2>
+        <p id="subtotal-amount">₹0</p>
+    </section>
+
+    <!-- Payment Section -->
+    <section id="payment">
+        <h2>Payment Methods</h2>
+        <form id="payment-form">
+            <input type="radio" id="credit-card" name="payment" value="Credit Card" checked>
+            <label for="credit-card">Credit/Debit Card</label><br>
+
+            <input type="radio" id="upi" name="payment" value="UPI">
+            <label for="upi">UPI</label><br>
+
+            <input type="radio" id="bank-transfer" name="payment" value="Bank Transfer">
+            <label for="bank-transfer">Bank Transfer</label><br>
+
+            <!-- Bank Details (hidden by default) -->
+            <div id="bank-details" style="display: none;">
+                <p>Bank Account: XXXX-XXXX-XXXX</p>
+                <p>IFSC Code: XXXX1234</p>
+            </div><br>
+
+            <input type="submit" value="Pay Now">
+        </form>
+    </section>
+
+    <!-- Confirmation Message -->
+    <section id="confirmation" style="display: none;">
+        <h2>Payment Confirmation</h2>
+        <p>Thank you for your payment. A confirmation has been sent to your email.</p>
+    </section>
+
+    <!-- Link to external JavaScript file -->
+    <script src="Registration.js"></script>
+</body>
+</html>
